@@ -109,7 +109,9 @@ def print_registry(indent=2, file=sys.stdout, colored=False):
 
         if len(keys) == 1:
             # We are at the end, so lets assign the leaf value
-            tree[keys[0]] = leaf
+            values = tree.get(keys[0], [])
+            values.append(leaf)
+            tree[keys[0]] = values
         else:
             # Otherwise lets keep building the tree
             next_key = keys[0]
@@ -126,9 +128,10 @@ def print_registry(indent=2, file=sys.stdout, colored=False):
     def print_tree(ind, tree):
         for k, v in tree.items():
             color_print((' ' * (ind-1)) + ' - ' + k, color='green', file=file)
-            if type(v) == tuple:
-                color_print((' ' * (ind + indent + 2)) + v[0] + ':', color='blue', file=file, end=' ')
-                color_print(v[1], color='green', file=file)
+            if type(v) == list:
+                for e in v:
+                    color_print((' ' * (ind + indent + 2)) + e[0] + ':', color='blue', file=file, end=' ')
+                    color_print(e[1], color='green', file=file)
             else:
                 print_tree(ind + indent, v)
 

@@ -10,3 +10,8 @@ class SimpleModel:
     def __repr__(self):
         args = ','.join([f'{k}={v}' for k, v in self._args.items()])
         return f'SimpleModel({args})'
+
+
+@register('other')
+class OtherModel:
+    pass
