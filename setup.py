@@ -19,8 +19,8 @@ setup_options = dict(
     long_description=long_description,
     long_description_content_type="text/markdown",
 
-    author='Resero-Labs',
-    url='https://github.com/resero-labs/type-registry.git',
+    author='Michael Wright',
+    url='https://github.com/mikewright/py-type-registry.git',
 
     packages=find_packages(exclude=['tests*']),
     license="MIT License",
