@@ -55,6 +55,13 @@ model:
   use_aws: $USE_AWS
 ```
 
+The construction from config will also work using the PyYAML built-in construction mechanism:
+
+```yaml
+base:
+  __factory__: !!python/name:url_classifier.data.training.dataset.TrainValidationDataset
+```
+
 ## Viewing the Registery
 
 To make working with the library a little easier, there is a function that can be called which will print out
