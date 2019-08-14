@@ -36,6 +36,7 @@ setup_options = dict(
 
     install_requires=[
         'PyYAML (>=3.13,<4.0)',
+        'termcolor (>=1.1.0,<2.0)',
     ],
 
     extras_require={
