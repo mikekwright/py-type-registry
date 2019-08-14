@@ -1,8 +1,18 @@
+"""
+This module provides the function calls to support working with a registry to allow easily
+referencing and instantiating types using an alias.
+"""
 import sys
 
 from termcolor import cprint
 
+
+__all__ = ['register', 'register_type', 'register_library', 'print_registry']
+
+
+# GLOBAL STORE
 _registered_types = {}
+
 
 def register_type(name, **kwargs):
     """
@@ -68,7 +78,7 @@ def find_type(name):
     return _registered_types[name]
 
 
-def print_registry(indent=2, out_fp=sys.stdout, colored=False):
+def print_registry(indent=2, file=sys.stdout, colored=False):
     """
     This is a helper method that can be used to print out everything that has
     been registered with the system.  It attempts to provide a hierarchical
@@ -115,12 +125,12 @@ def print_registry(indent=2, out_fp=sys.stdout, colored=False):
     # 4. Print tree
     def print_tree(ind, tree):
         for k, v in tree.items():
-            color_print((' ' * (ind-1)) + ' - ' + k, color='green', file=out_fp)
+            color_print((' ' * (ind-1)) + ' - ' + k, color='green', file=file)
             if type(v) == tuple:
-                color_print((' ' * (ind + indent + 2)) + v[0] + ':', color='blue', file=out_fp, end=' ')
-                color_print(v[1], color='green', file=out_fp)
+                color_print((' ' * (ind + indent + 2)) + v[0] + ':', color='blue', file=file, end=' ')
+                color_print(v[1], color='green', file=file)
             else:
                 print_tree(ind + indent, v)
 
-    color_print('registry:', color='red', file=out_fp)
+    color_print('registry:', color='red', file=file)
     print_tree(0, tree)
